@@ -28,8 +28,14 @@ const Navbar = () => {
             <Link to="/courses" className="text-foreground hover:text-primary transition-colors">
               Courses
             </Link>
+            <Link to="/schedule" className="text-foreground hover:text-primary transition-colors">
+              Schedule
+            </Link>
             <Link to="/live-class" className="text-foreground hover:text-primary transition-colors">
               Live Class
+            </Link>
+            <Link to="/chatbot" className="text-foreground hover:text-primary transition-colors">
+              AI Chat
             </Link>
             <Link to="/login">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
@@ -59,8 +65,14 @@ const Navbar = () => {
             <Link to="/courses" className="text-foreground hover:text-primary transition-colors">
               Courses
             </Link>
+            <Link to="/schedule" className="text-foreground hover:text-primary transition-colors">
+              Schedule
+            </Link>
             <Link to="/live-class" className="text-foreground hover:text-primary transition-colors">
               Live Class
+            </Link>
+            <Link to="/chatbot" className="text-foreground hover:text-primary transition-colors">
+              AI Chat
             </Link>
             <Link to="/login">
               <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">

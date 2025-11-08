@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -148,18 +149,24 @@ const Dashboard = () => {
             <Card className="glass-card p-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
               <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
               <div className="space-y-3">
-                <Button className="w-full justify-start bg-navy hover:bg-navy-light">
-                  <Video className="w-4 h-4 mr-2" />
-                  {role === "student" ? "Join Live Class" : "Start Live Class"}
-                </Button>
-                <Button className="w-full justify-start bg-navy hover:bg-navy-light">
-                  <BookOpen className="w-4 h-4 mr-2" />
-                  {role === "student" ? "View Notes" : "Upload Notes"}
-                </Button>
-                <Button className="w-full justify-start bg-navy hover:bg-navy-light">
-                  <MessageSquare className="w-4 h-4 mr-2" />
-                  Ask AI Assistant
-                </Button>
+                <Link to="/live-class">
+                  <Button className="w-full justify-start bg-navy hover:bg-navy-light">
+                    <Video className="w-4 h-4 mr-2" />
+                    {role === "student" ? "Join Live Class" : "Start Live Class"}
+                  </Button>
+                </Link>
+                <Link to="/schedule">
+                  <Button className="w-full justify-start bg-navy hover:bg-navy-light">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    View Schedule
+                  </Button>
+                </Link>
+                <Link to="/chatbot">
+                  <Button className="w-full justify-start bg-navy hover:bg-navy-light">
+                    <MessageSquare className="w-4 h-4 mr-2" />
+                    Ask AI Assistant
+                  </Button>
+                </Link>
               </div>
             </Card>
 

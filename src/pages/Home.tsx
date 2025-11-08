@@ -124,9 +124,14 @@ const Home = () => {
               <GraduationCap className="w-6 h-6 text-primary" />
               <span className="font-semibold">EduCloud</span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Powered by IBM Cloud | Built for Excellence
-            </p>
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground">
+                Powered by <span className="text-primary font-semibold">IBM Cloud</span>
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Using IBM Watson, Cloudant, Cloud Object Storage & Cloud Foundry
+              </p>
+            </div>
           </div>
         </div>
       </footer>
