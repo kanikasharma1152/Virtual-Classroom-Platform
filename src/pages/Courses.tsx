@@ -75,71 +75,79 @@ const Courses = () => {
   ];
 
   return (
-    <div className="min-h-screen gradient-animated">
+    <div className="min-h-screen bg-gradient-to-b from-background to-navy-dark relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '0s' }}></div>
+        <div className="absolute bottom-40 right-20 w-96 h-96 bg-pink-light/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+      </div>
+      
       <Navbar />
       
-      <div className="container mx-auto px-4 pt-24 pb-12">
-        <div className="mb-8 animate-fade-in">
-          <h1 className="text-4xl font-bold mb-2">My Courses</h1>
-          <p className="text-muted-foreground">Continue your learning journey</p>
+      <div className="container mx-auto px-4 pt-28 pb-12 relative z-10">
+        <div className="mb-12 text-center fade-in-scale">
+          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-pink-light bg-clip-text text-transparent">
+            📚 My Courses
+          </h1>
+          <p className="text-foreground/80 text-xl">Continue your learning journey and achieve your goals</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => (
             <Card 
               key={course.id}
-              className="glass-card p-6 hover:scale-105 transition-transform duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="glass-card p-8 hover:scale-110 hover:rotate-1 transition-all duration-300 cursor-pointer border-2 border-navy-light hover:border-primary group"
+              style={{ animation: `fade-in-scale 0.5s ease-out ${index * 0.1}s backwards` }}
             >
-              <div className="text-6xl mb-4">{course.image}</div>
+              <div className="text-8xl mb-6 group-hover:animate-bounce">{course.image}</div>
               
-              <div className="flex items-center gap-2 mb-3">
-                <Badge className="bg-primary">
+              <div className="flex items-center gap-3 mb-4">
+                <Badge className="bg-primary text-base px-3 py-1 glow-pink">
                   {course.level}
                 </Badge>
                 {course.progress > 0 && (
-                  <Badge variant="secondary">
-                    In Progress
+                  <Badge variant="secondary" className="text-base px-3 py-1">
+                    ⚡ In Progress
                   </Badge>
                 )}
               </div>
 
-              <h3 className="text-xl font-bold mb-2">{course.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{course.instructor}</p>
+              <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{course.title}</h3>
+              <p className="text-base text-muted-foreground mb-6 font-medium">👨‍🏫 {course.instructor}</p>
 
-              <div className="space-y-3 mb-4">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Users className="w-4 h-4 text-primary" />
-                  {course.students} students
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-3 text-base text-foreground/80 font-medium">
+                  <Users className="w-5 h-5 text-primary" />
+                  👥 {course.students} students enrolled
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4 text-primary" />
-                  {course.duration}
+                <div className="flex items-center gap-3 text-base text-foreground/80 font-medium">
+                  <Clock className="w-5 h-5 text-primary" />
+                  ⏱️ {course.duration} duration
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Star className="w-4 h-4 text-primary fill-primary" />
-                  {course.rating} rating
+                <div className="flex items-center gap-3 text-base text-foreground/80 font-medium">
+                  <Star className="w-5 h-5 text-primary fill-primary" />
+                  ⭐ {course.rating} rating
                 </div>
               </div>
 
               {course.progress > 0 && (
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className="text-muted-foreground">Progress</span>
-                    <span className="text-primary font-semibold">{course.progress}%</span>
+                <div className="mb-6">
+                  <div className="flex justify-between text-base mb-3">
+                    <span className="text-foreground/80 font-semibold">Progress</span>
+                    <span className="text-primary font-bold text-lg">{course.progress}%</span>
                   </div>
-                  <div className="h-2 bg-navy rounded-full overflow-hidden">
+                  <div className="h-3 bg-navy rounded-full overflow-hidden border border-navy-light">
                     <div 
-                      className="h-full bg-primary glow-pink transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-primary to-pink-light glow-pink transition-all duration-500 animate-pulse"
                       style={{ width: `${course.progress}%` }}
                     />
                   </div>
                 </div>
               )}
 
-              <Button className="w-full bg-primary hover:bg-primary/90 glow-pink">
-                <Play className="w-4 h-4 mr-2" />
-                {course.progress > 0 ? "Continue Learning" : "Start Course"}
+              <Button className="w-full bg-primary hover:bg-primary/90 glow-pink text-lg py-7 hover:scale-105 transition-all font-semibold">
+                <Play className="w-5 h-5 mr-2" />
+                {course.progress > 0 ? "🚀 Continue Learning" : "▶️ Start Course"}
               </Button>
             </Card>
           ))}
