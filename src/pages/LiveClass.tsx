@@ -61,15 +61,15 @@ const LiveClass = () => {
       
       <div className="container mx-auto px-4 pt-28 pb-12 relative z-10">
         <div className="mb-8 fade-in-scale">
-          <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
             <div>
-              <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-foreground via-primary to-pink-light bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-foreground via-primary to-pink-light bg-clip-text text-transparent">
                 🎥 Web Development - Live Class
               </h1>
-              <p className="text-foreground/80 text-xl font-medium">👨‍🏫 Dr. Smith • Started 15 minutes ago</p>
+              <p className="text-foreground/80 text-base font-medium">👨‍🏫 Dr. Smith • Started 15 min ago</p>
             </div>
-            <Badge className="bg-primary glow-pink animate-pulse text-xl px-6 py-3">
-              <div className="w-3 h-3 bg-white rounded-full mr-3 animate-bounce" />
+            <Badge className="bg-primary glow-pink animate-pulse px-4 py-2">
+              <div className="w-2 h-2 bg-white rounded-full mr-2 animate-bounce" />
               🔴 LIVE
             </Badge>
           </div>
@@ -95,68 +95,68 @@ const LiveClass = () => {
                 ))}
               </div>
               <div className="relative z-10 text-center">
-                <Video className="w-32 h-32 text-primary mx-auto mb-6 pulse-glow animate-bounce" />
-                <p className="text-3xl font-bold mb-2">Dr. Smith is presenting</p>
-                <p className="text-lg text-foreground/80 font-medium mt-3">📡 Video stream active</p>
+                <Video className="w-24 h-24 text-primary mx-auto mb-4 pulse-glow animate-bounce" />
+                <p className="text-2xl font-bold mb-2">Dr. Smith is presenting</p>
+                <p className="text-base text-foreground/80 font-medium mt-2">📡 Video stream active</p>
               </div>
               
               {/* Participant count overlay */}
-              <div className="absolute top-6 right-6 glass-card px-5 py-3 flex items-center gap-3 border-2 border-primary/50">
-                <Users className="w-6 h-6 text-primary animate-pulse" />
-                <span className="font-bold text-xl">{participants.length} online</span>
+              <div className="absolute top-4 right-4 glass-card px-4 py-2 flex items-center gap-2 border-2 border-primary/50">
+                <Users className="w-5 h-5 text-primary animate-pulse" />
+                <span className="font-bold text-base">{participants.length} online</span>
               </div>
             </div>
 
             {/* Control Bar */}
-            <div className="flex items-center justify-center gap-6 flex-wrap">
+            <div className="flex items-center justify-center gap-4 flex-wrap">
               <Button
                 size="lg"
                 variant={isMuted ? "destructive" : "secondary"}
-                className={`rounded-full h-16 w-16 hover:scale-110 transition-all ${isMuted ? "glow-pink animate-pulse" : ""}`}
+                className={`rounded-full h-12 w-12 hover:scale-105 transition-all ${isMuted ? "glow-pink animate-pulse" : ""}`}
                 onClick={() => {
                   setIsMuted(!isMuted);
                   toast.success(isMuted ? "🎤 Microphone on" : "🔇 Microphone muted");
                 }}
               >
-                {isMuted ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+                {isMuted ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
               </Button>
 
               <Button
                 size="lg"
                 variant={isVideoOff ? "destructive" : "secondary"}
-                className={`rounded-full h-16 w-16 hover:scale-110 transition-all ${isVideoOff ? "glow-pink animate-pulse" : ""}`}
+                className={`rounded-full h-12 w-12 hover:scale-105 transition-all ${isVideoOff ? "glow-pink animate-pulse" : ""}`}
                 onClick={() => {
                   setIsVideoOff(!isVideoOff);
                   toast.success(isVideoOff ? "📹 Camera on" : "📵 Camera off");
                 }}
               >
-                {isVideoOff ? <VideoOff className="w-6 h-6" /> : <Video className="w-6 h-6" />}
+                {isVideoOff ? <VideoOff className="w-5 h-5" /> : <Video className="w-5 h-5" />}
               </Button>
 
               <Button
                 size="lg"
                 variant="secondary"
-                className="rounded-full h-16 w-16 hover:scale-110 transition-all"
+                className="rounded-full h-12 w-12 hover:scale-105 transition-all"
                 onClick={() => toast.success("🖥️ Screen sharing started")}
               >
-                <MonitorUp className="w-6 h-6" />
+                <MonitorUp className="w-5 h-5" />
               </Button>
 
               <Button
                 size="lg"
                 variant="secondary"
-                className="rounded-full h-16 w-16 hover:scale-110 transition-all"
+                className="rounded-full h-12 w-12 hover:scale-105 transition-all"
               >
-                <Settings className="w-6 h-6" />
+                <Settings className="w-5 h-5" />
               </Button>
 
               <Button
                 size="lg"
                 variant="destructive"
-                className="rounded-full h-16 w-16 glow-pink hover:scale-110 transition-all animate-pulse"
+                className="rounded-full h-12 w-12 glow-pink hover:scale-105 transition-all animate-pulse"
                 onClick={handleLeaveClass}
               >
-                <PhoneOff className="w-6 h-6" />
+                <PhoneOff className="w-5 h-5" />
               </Button>
             </div>
           </Card>
@@ -165,22 +165,22 @@ const LiveClass = () => {
           <div className="space-y-8">
             {/* Participants Panel */}
             <Card className="glass-card p-6 slide-in-right border-2 border-navy-light hover:border-primary transition-all">
-              <div className="flex items-center gap-3 mb-6 border-b border-navy-light pb-3">
-                <Users className="w-6 h-6 text-primary animate-pulse" />
-                <h3 className="font-bold text-xl">👥 Participants ({participants.length})</h3>
+              <div className="flex items-center gap-2 mb-5 border-b border-navy-light pb-3">
+                <Users className="w-5 h-5 text-primary animate-pulse" />
+                <h3 className="font-bold text-lg">👥 Participants ({participants.length})</h3>
               </div>
-              <div className="space-y-3 max-h-60 overflow-y-auto">
+              <div className="space-y-2 max-h-60 overflow-y-auto">
                 {participants.map((participant, index) => (
                   <div 
                     key={index} 
-                    className="flex items-center justify-between p-3 rounded-xl hover:bg-navy/50 transition-all cursor-pointer border border-navy-light hover:border-primary hover:scale-105"
+                    className="flex items-center justify-between p-2 rounded-xl hover:bg-navy/50 transition-all cursor-pointer border border-navy-light hover:border-primary hover:scale-105"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-3 h-3 rounded-full ${participant.active ? 'bg-primary glow-pink animate-pulse' : 'bg-muted'}`} />
-                      <span className="text-base font-medium">{participant.name}</span>
+                    <div className="flex items-center gap-2">
+                      <div className={`w-2 h-2 rounded-full ${participant.active ? 'bg-primary glow-pink animate-pulse' : 'bg-muted'}`} />
+                      <span className="text-sm font-medium">{participant.name}</span>
                     </div>
                     {participant.role === "instructor" && (
-                      <Badge variant="secondary" className="text-sm px-3">👨‍🏫 Host</Badge>
+                      <Badge variant="secondary" className="text-xs px-2">👨‍🏫 Host</Badge>
                     )}
                   </div>
                 ))}
@@ -189,37 +189,37 @@ const LiveClass = () => {
 
             {/* Chat Panel */}
             <Card className="glass-card p-6 slide-in-right border-2 border-navy-light hover:border-primary transition-all" style={{ animationDelay: '0.2s' }}>
-              <div className="flex items-center gap-3 mb-6 border-b border-navy-light pb-3">
-                <MessageSquare className="w-6 h-6 text-primary animate-pulse" />
-                <h3 className="font-bold text-xl">💬 Live Chat</h3>
+              <div className="flex items-center gap-2 mb-5 border-b border-navy-light pb-3">
+                <MessageSquare className="w-5 h-5 text-primary animate-pulse" />
+                <h3 className="font-bold text-lg">💬 Live Chat</h3>
               </div>
               
               {/* Messages */}
-              <div className="space-y-4 mb-6 max-h-72 overflow-y-auto">
+              <div className="space-y-3 mb-5 max-h-72 overflow-y-auto">
                 {chatMessages.map((msg, index) => (
                   <div 
                     key={index} 
-                    className="text-base p-3 rounded-lg bg-navy/30 hover:bg-navy/50 transition-all"
+                    className="text-sm p-2 rounded-lg bg-navy/30 hover:bg-navy/50 transition-all"
                   >
-                    <div className="flex items-baseline gap-3 mb-1">
-                      <span className="font-bold text-primary">{msg.user}</span>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="font-bold text-primary text-sm">{msg.user}</span>
                       <span className="text-xs text-muted-foreground font-medium">⏰ {msg.time}</span>
                     </div>
-                    <p className="text-foreground/80">{msg.message}</p>
+                    <p className="text-foreground/80 text-sm">{msg.message}</p>
                   </div>
                 ))}
               </div>
 
               {/* Message Input */}
-              <form onSubmit={handleSendMessage} className="flex gap-3">
+              <form onSubmit={handleSendMessage} className="flex gap-2">
                 <Input
                   placeholder="Type a message..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="bg-navy border-2 border-navy-light focus:border-primary text-base py-6"
+                  className="bg-navy border-2 border-navy-light focus:border-primary text-sm py-4"
                 />
-                <Button type="submit" size="icon" className="bg-primary hover:bg-primary/90 glow-pink h-12 w-12 hover:scale-110 transition-all">
-                  <Send className="w-5 h-5" />
+                <Button type="submit" size="icon" className="bg-primary hover:bg-primary/90 glow-pink h-10 w-10 hover:scale-105 transition-all">
+                  <Send className="w-4 h-4" />
                 </Button>
               </form>
             </Card>

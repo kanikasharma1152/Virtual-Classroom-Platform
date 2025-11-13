@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Clock, Users, Star, Play } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Courses = () => {
+  const navigate = useNavigate();
   const courses = [
     {
       id: 1,
@@ -85,11 +87,11 @@ const Courses = () => {
       <Navbar />
       
       <div className="container mx-auto px-4 pt-28 pb-12 relative z-10">
-        <div className="mb-12 text-center fade-in-scale">
-          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-foreground via-primary to-pink-light bg-clip-text text-transparent">
+        <div className="mb-8 text-center fade-in-scale">
+          <h1 className="text-3xl font-bold mb-3 bg-gradient-to-r from-foreground via-primary to-pink-light bg-clip-text text-transparent">
             📚 My Courses
           </h1>
-          <p className="text-foreground/80 text-xl">Continue your learning journey and achieve your goals</p>
+          <p className="text-foreground/80 text-base">Continue your learning journey</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

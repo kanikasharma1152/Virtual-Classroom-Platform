@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Send, Bot, User, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useNavigate } from "react-router-dom";
+import aiRobot from "@/assets/ai-robot.png";
 
 interface Message {
   role: "user" | "assistant";
@@ -13,6 +15,7 @@ interface Message {
 }
 
 const Chatbot = () => {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -69,12 +72,12 @@ const Chatbot = () => {
       
       <div className="container mx-auto px-4 pt-24 pb-12">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-8 animate-fade-in text-center">
-            <div className="inline-block mb-4">
-              <Bot className="w-16 h-16 text-primary animate-float" />
+          <div className="mb-6 animate-fade-in text-center">
+            <div className="inline-block mb-3">
+              <img src={aiRobot} alt="AI Robot Assistant" className="w-24 h-24 animate-float" />
             </div>
-            <h1 className="text-4xl font-bold mb-2">AI Assistant</h1>
-            <Badge className="bg-primary glow-pink">
+            <h1 className="text-2xl font-bold mb-2">AI Assistant</h1>
+            <Badge className="bg-primary glow-pink text-sm">
               <Sparkles className="w-3 h-3 mr-1" />
               Powered by IBM Watson
             </Badge>
@@ -133,19 +136,40 @@ const Chatbot = () => {
 
             {/* Quick Questions */}
             <div className="mb-4">
-              <p className="text-sm text-muted-foreground mb-3">Quick questions:</p>
+              <p className="text-sm text-muted-foreground mb-2">Quick actions:</p>
               <div className="flex flex-wrap gap-2">
-                {quickQuestions.map((question, index) => (
-                  <Button
-                    key={index}
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleSend(question)}
-                    className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
-                  >
-                    {question}
-                  </Button>
-                ))}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate("/schedule")}
+                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
+                >
+                  View Schedule
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate("/courses")}
+                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
+                >
+                  My Courses
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate("/live-class")}
+                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
+                >
+                  Join Live Class
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate("/dashboard")}
+                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
+                >
+                  Dashboard
+                </Button>
               </div>
             </div>
 
@@ -176,19 +200,31 @@ const Chatbot = () => {
 
           {/* Features Info */}
           <div className="grid md:grid-cols-3 gap-4">
-            <Card className="glass-card p-4 text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <MessageSquare className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="font-semibold mb-1">24/7 Available</h3>
+            <Card 
+              className="glass-card p-4 text-center animate-fade-in cursor-pointer hover:scale-105 transition-all" 
+              style={{ animationDelay: '0.2s' }}
+              onClick={() => navigate("/schedule")}
+            >
+              <MessageSquare className="w-6 h-6 text-primary mx-auto mb-2" />
+              <h3 className="text-sm font-semibold mb-1">24/7 Available</h3>
               <p className="text-xs text-muted-foreground">Always here to help</p>
             </Card>
-            <Card className="glass-card p-4 text-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
-              <Sparkles className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="font-semibold mb-1">Smart Responses</h3>
+            <Card 
+              className="glass-card p-4 text-center animate-fade-in cursor-pointer hover:scale-105 transition-all" 
+              style={{ animationDelay: '0.3s' }}
+              onClick={() => navigate("/courses")}
+            >
+              <Sparkles className="w-6 h-6 text-primary mx-auto mb-2" />
+              <h3 className="text-sm font-semibold mb-1">Smart Responses</h3>
               <p className="text-xs text-muted-foreground">Powered by IBM Watson</p>
             </Card>
-            <Card className="glass-card p-4 text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <Bot className="w-8 h-8 text-primary mx-auto mb-2" />
-              <h3 className="font-semibold mb-1">Personalized</h3>
+            <Card 
+              className="glass-card p-4 text-center animate-fade-in cursor-pointer hover:scale-105 transition-all" 
+              style={{ animationDelay: '0.4s' }}
+              onClick={() => navigate("/live-class")}
+            >
+              <Bot className="w-6 h-6 text-primary mx-auto mb-2" />
+              <h3 className="text-sm font-semibold mb-1">Personalized</h3>
               <p className="text-xs text-muted-foreground">Learns your preferences</p>
             </Card>
           </div>

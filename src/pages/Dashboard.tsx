@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,6 +23,7 @@ import studentAvatar2 from "@/assets/student-avatar-2.png";
 import teacherAvatar from "@/assets/teacher-avatar.png";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [role, setRole] = useState<"student" | "teacher">("student");
 
   const upcomingClasses = [
@@ -66,18 +67,18 @@ const Dashboard = () => {
       <div className="container mx-auto px-4 pt-24 pb-12">
         {/* Role Toggle */}
         <div className="flex justify-center mb-8 fade-in-scale">
-          <div className="glass-card p-2 rounded-full inline-flex gap-3 border-2 border-navy-light">
+          <div className="glass-card p-2 rounded-full inline-flex gap-2 border-2 border-navy-light">
             <Button
               onClick={() => setRole("student")}
               variant={role === "student" ? "default" : "ghost"}
-              className={`text-lg px-8 py-6 transition-all ${role === "student" ? "bg-primary glow-pink scale-105" : "hover:scale-105"}`}
+              className={`px-6 py-4 transition-all ${role === "student" ? "bg-primary glow-pink scale-105" : "hover:scale-105"}`}
             >
               👨‍🎓 Student View
             </Button>
             <Button
               onClick={() => setRole("teacher")}
               variant={role === "teacher" ? "default" : "ghost"}
-              className={`text-lg px-8 py-6 transition-all ${role === "teacher" ? "bg-primary glow-pink scale-105" : "hover:scale-105"}`}
+              className={`px-6 py-4 transition-all ${role === "teacher" ? "bg-primary glow-pink scale-105" : "hover:scale-105"}`}
             >
               👩‍🏫 Teacher View
             </Button>
@@ -85,17 +86,17 @@ const Dashboard = () => {
         </div>
 
         {/* Welcome Section with Avatar */}
-        <div className="mb-10 flex items-center gap-6 slide-in-left glass-card p-8 rounded-2xl border-2 border-navy-light">
-          <Avatar className="w-28 h-28 border-4 border-primary glow-pink">
+        <div className="mb-8 flex items-center gap-4 slide-in-left glass-card p-6 rounded-2xl border-2 border-navy-light">
+          <Avatar className="w-20 h-20 border-4 border-primary glow-pink">
             <AvatarImage src={role === "student" ? studentAvatar1 : teacherAvatar} alt="Profile" />
             <AvatarFallback>{role === "student" ? "S" : "T"}</AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-foreground via-primary to-pink-light bg-clip-text text-transparent flex items-center gap-3">
+            <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-foreground via-primary to-pink-light bg-clip-text text-transparent flex items-center gap-2">
               Welcome back, {role === "student" ? "Alex" : "Professor"}! 
-              <Sparkles className="w-8 h-8 text-primary animate-pulse" />
+              <Sparkles className="w-6 h-6 text-primary animate-pulse" />
             </h1>
-            <p className="text-foreground/80 text-xl">
+            <p className="text-foreground/80 text-base">
               {role === "student" 
                 ? "Ready to continue your learning journey? ✨" 
                 : "Let's make today's classes amazing! 🚀"}
@@ -108,14 +109,14 @@ const Dashboard = () => {
           {stats.map((stat, index) => (
             <Card 
               key={index}
-              className="glass-card p-8 hover:scale-110 hover:-rotate-1 transition-all duration-300 cursor-pointer border-2 border-navy-light hover:border-primary group"
+              className="glass-card p-6 hover:scale-105 transition-all duration-300 cursor-pointer border-2 border-navy-light hover:border-primary group"
               style={{ animation: `fade-in-scale 0.5s ease-out ${index * 0.1}s backwards` }}
             >
-              <div className="flex items-center justify-between mb-4">
-                <stat.icon className="w-10 h-10 text-primary group-hover:animate-bounce transition-all" />
-                <span className="text-4xl font-bold text-primary group-hover:animate-pulse">{stat.value}</span>
+              <div className="flex items-center justify-between mb-3">
+                <stat.icon className="w-8 h-8 text-primary group-hover:animate-bounce transition-all" />
+                <span className="text-2xl font-bold text-primary group-hover:animate-pulse">{stat.value}</span>
               </div>
-              <p className="text-base text-foreground/70 font-semibold">{stat.label}</p>
+              <p className="text-sm text-foreground/70 font-semibold">{stat.label}</p>
             </Card>
           ))}
         </div>
@@ -123,43 +124,48 @@ const Dashboard = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Upcoming Classes */}
           <Card className="glass-card p-8 lg:col-span-2 slide-in-left border-2 border-navy-light hover:border-primary transition-all">
-            <div className="flex items-center gap-3 mb-8 border-b border-navy-light pb-4">
-              <Calendar className="w-8 h-8 text-primary animate-pulse" />
-              <h2 className="text-3xl font-bold">📅 Upcoming Classes</h2>
+            <div className="flex items-center gap-3 mb-6 border-b border-navy-light pb-3">
+              <Calendar className="w-6 h-6 text-primary animate-pulse" />
+              <h2 className="text-xl font-bold">📅 Upcoming Classes</h2>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-4">
               {upcomingClasses.map((cls, index) => (
                 <div 
                   key={index}
-                  className="glass-card p-6 flex items-center justify-between hover:scale-105 transition-all cursor-pointer border border-navy-light hover:border-primary group"
+                  className="glass-card p-5 flex items-center justify-between hover:scale-105 transition-all cursor-pointer border border-navy-light hover:border-primary group"
                   style={{ animation: `slide-in-left 0.5s ease-out ${index * 0.1}s backwards` }}
+                  onClick={() => cls.live && navigate("/live-class")}
                 >
-                  <div className="flex items-center gap-5">
-                    <Avatar className="w-16 h-16 border-2 border-primary/50">
+                  <div className="flex items-center gap-4">
+                    <Avatar className="w-12 h-12 border-2 border-primary/50">
                       <AvatarImage src={studentAvatar2} />
                       <AvatarFallback>
-                        <Video className="w-8 h-8 text-primary" />
+                        <Video className="w-6 h-6 text-primary" />
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <h3 className="font-bold text-xl flex items-center gap-3 group-hover:text-primary transition-colors">
+                      <h3 className="font-bold text-lg flex items-center gap-2 group-hover:text-primary transition-colors">
                         {cls.subject}
                         {cls.live && (
-                          <Badge className="bg-primary glow-pink animate-pulse text-base px-3 py-1">
-                            <Play className="w-4 h-4 mr-1" />
+                          <Badge className="bg-primary glow-pink animate-pulse px-2 py-1">
+                            <Play className="w-3 h-3 mr-1" />
                             LIVE
                           </Badge>
                         )}
                       </h3>
-                      <p className="text-base text-muted-foreground font-medium mt-1">
+                      <p className="text-sm text-muted-foreground font-medium mt-1">
                         👨‍🏫 {cls.instructor} • ⏰ {cls.time}
                       </p>
                     </div>
                   </div>
                   <Button 
-                    size="lg" 
-                    className={`text-base px-6 hover:scale-110 transition-all font-semibold ${cls.live ? "bg-primary glow-pink animate-pulse" : "border-2 border-primary"}`}
+                    size="sm" 
+                    className={`px-5 hover:scale-105 transition-all font-semibold ${cls.live ? "bg-primary glow-pink animate-pulse" : "border-2 border-primary"}`}
                     variant={cls.live ? "default" : "outline"}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(cls.live ? "/live-class" : "/schedule");
+                    }}
                   >
                     {cls.live ? "🚀 Join Now" : "📌 Schedule"}
                   </Button>
@@ -172,30 +178,36 @@ const Dashboard = () => {
           <div className="space-y-8">
             {/* Quick Actions */}
             <Card className="glass-card p-8 slide-in-right border-2 border-navy-light hover:border-primary transition-all">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+              <h2 className="text-xl font-bold mb-5 flex items-center gap-2">
                 ⚡ Quick Actions
               </h2>
-              <div className="space-y-4">
-                <Link to="/live-class" className="block">
-                  <Button className="w-full justify-start text-lg py-7 bg-primary hover:bg-primary/90 hover:scale-105 transition-all glow-pink group">
-                    <Video className="w-6 h-6 mr-3 group-hover:animate-bounce" />
-                    {role === "student" ? "🎥 Join Live Class" : "🎬 Start Live Class"}
-                  </Button>
-                </Link>
-                <Link to="/schedule" className="block">
-                  <Button className="w-full justify-start text-lg py-7 bg-navy hover:bg-navy-light border-2 border-primary/50 hover:border-primary hover:scale-105 transition-all group">
-                    <Calendar className="w-6 h-6 mr-3 group-hover:animate-bounce" />
-                    📅 View Schedule
-                  </Button>
-                </Link>
-                <Link to="/chatbot" className="block">
-                  <Button className="w-full justify-start text-lg py-7 bg-navy hover:bg-navy-light border-2 border-primary/50 hover:border-primary hover:scale-105 transition-all group">
-                    <MessageSquare className="w-6 h-6 mr-3 group-hover:animate-bounce" />
-                    🤖 Ask AI Assistant
-                  </Button>
-                </Link>
-                <Button className="w-full justify-start text-lg py-7 bg-navy hover:bg-navy-light border-2 border-primary/50 hover:border-primary hover:scale-105 transition-all group">
-                  <BookOpen className="w-6 h-6 mr-3 group-hover:animate-bounce" />
+              <div className="space-y-3">
+                <Button 
+                  className="w-full justify-start py-5 bg-primary hover:bg-primary/90 hover:scale-105 transition-all glow-pink group"
+                  onClick={() => navigate("/live-class")}
+                >
+                  <Video className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  {role === "student" ? "🎥 Join Live Class" : "🎬 Start Live Class"}
+                </Button>
+                <Button 
+                  className="w-full justify-start py-5 bg-navy hover:bg-navy-light border-2 border-primary/50 hover:border-primary hover:scale-105 transition-all group"
+                  onClick={() => navigate("/schedule")}
+                >
+                  <Calendar className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  📅 View Schedule
+                </Button>
+                <Button 
+                  className="w-full justify-start py-5 bg-navy hover:bg-navy-light border-2 border-primary/50 hover:border-primary hover:scale-105 transition-all group"
+                  onClick={() => navigate("/chatbot")}
+                >
+                  <MessageSquare className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  🤖 Ask AI Assistant
+                </Button>
+                <Button 
+                  className="w-full justify-start py-5 bg-navy hover:bg-navy-light border-2 border-primary/50 hover:border-primary hover:scale-105 transition-all group"
+                  onClick={() => navigate("/courses")}
+                >
+                  <BookOpen className="w-5 h-5 mr-2 group-hover:animate-bounce" />
                   📚 Course Materials
                 </Button>
               </div>

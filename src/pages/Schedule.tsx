@@ -42,27 +42,30 @@ const Schedule = () => {
       <Navbar />
       
       <div className="container mx-auto px-4 pt-24 pb-12">
-        <div className="mb-8 animate-fade-in">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold mb-2">Class Schedule</h1>
-              <p className="text-muted-foreground">Week of December 16-20, 2024</p>
+          <div className="mb-6 animate-fade-in">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold mb-2">📅 Class Schedule</h1>
+                <p className="text-muted-foreground text-sm">Week of December 16-20, 2024</p>
+              </div>
+              <Button 
+                className="bg-primary hover:bg-primary/90 glow-pink"
+                onClick={() => toast.success("⏰ Reminders set for all classes!")}
+              >
+                <Bell className="w-4 h-4 mr-2" />
+                Set Reminders
+              </Button>
             </div>
-            <Button className="bg-primary hover:bg-primary/90 glow-pink">
-              <Bell className="w-4 h-4 mr-2" />
-              Set Reminders
-            </Button>
           </div>
-        </div>
 
         {/* Weekly Calendar Grid */}
-        <Card className="glass-card p-6 animate-slide-up overflow-x-auto">
+        <Card className="glass-card p-5 animate-slide-up overflow-x-auto">
           <div className="min-w-[800px]">
             {/* Header Row */}
-            <div className="grid grid-cols-6 gap-4 mb-4">
-              <div className="font-bold text-muted-foreground">Time</div>
+            <div className="grid grid-cols-6 gap-3 mb-3">
+              <div className="font-bold text-muted-foreground text-sm">Time</div>
               {days.map(day => (
-                <div key={day} className="font-bold text-center">{day}</div>
+                <div key={day} className="font-bold text-center text-sm">{day}</div>
               ))}
             </div>
 
@@ -70,11 +73,11 @@ const Schedule = () => {
             {timeSlots.map((time, timeIndex) => (
               <div 
                 key={time} 
-                className="grid grid-cols-6 gap-4 mb-4 animate-fade-in"
+                className="grid grid-cols-6 gap-3 mb-3 animate-fade-in"
                 style={{ animationDelay: `${timeIndex * 0.1}s` }}
               >
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4 text-primary" />
+                  <Clock className="w-3 h-3 text-primary" />
                   {time}
                 </div>
                 {days.map(day => {
@@ -110,39 +113,39 @@ const Schedule = () => {
         </Card>
 
         {/* Today's Classes Summary */}
-        <div className="mt-8 grid md:grid-cols-3 gap-6">
-          <Card className="glass-card p-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                <Calendar className="w-6 h-6 text-primary" />
+        <div className="mt-6 grid md:grid-cols-3 gap-5">
+          <Card className="glass-card p-5 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <Calendar className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-2xl font-bold">2</p>
-                <p className="text-sm text-muted-foreground">Classes Today</p>
+                <p className="text-xl font-bold">2</p>
+                <p className="text-xs text-muted-foreground">Classes Today</p>
               </div>
             </div>
           </Card>
 
-          <Card className="glass-card p-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                <Clock className="w-6 h-6 text-primary" />
+          <Card className="glass-card p-5 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <Clock className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-2xl font-bold">6 hrs</p>
-                <p className="text-sm text-muted-foreground">This Week</p>
+                <p className="text-xl font-bold">6 hrs</p>
+                <p className="text-xs text-muted-foreground">This Week</p>
               </div>
             </div>
           </Card>
 
-          <Card className="glass-card p-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                <Video className="w-6 h-6 text-primary" />
+          <Card className="glass-card p-5 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <Video className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-2xl font-bold">18</p>
-                <p className="text-sm text-muted-foreground">Total Classes</p>
+                <p className="text-xl font-bold">18</p>
+                <p className="text-xs text-muted-foreground">Total Classes</p>
               </div>
             </div>
           </Card>
