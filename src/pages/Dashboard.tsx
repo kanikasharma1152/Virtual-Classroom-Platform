@@ -210,6 +210,13 @@ const Dashboard = () => {
                   <BookOpen className="w-5 h-5 mr-2 group-hover:animate-bounce" />
                   📚 Course Materials
                 </Button>
+                <Button 
+                  className="w-full justify-start py-5 bg-navy hover:bg-navy-light border-2 border-primary/50 hover:border-primary hover:scale-105 transition-all group"
+                  onClick={() => navigate("/assignments")}
+                >
+                  <FileText className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  📝 View Assignments
+                </Button>
               </div>
             </Card>
 

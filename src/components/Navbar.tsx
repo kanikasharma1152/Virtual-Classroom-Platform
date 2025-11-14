@@ -37,6 +37,9 @@ const Navbar = () => {
             <Link to="/chatbot" className="text-foreground hover:text-primary transition-all hover:scale-110 font-semibold text-lg">
               🤖 AI Chat
             </Link>
+            <Link to="/assignments" className="text-foreground hover:text-primary transition-all hover:scale-110 font-semibold text-lg">
+              📚 Assignments
+            </Link>
             <Link to="/login">
               <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground hover:scale-110 transition-all text-base px-6 glow-pink">
                 🚀 Login
@@ -73,6 +76,9 @@ const Navbar = () => {
             </Link>
             <Link to="/chatbot" className="text-foreground hover:text-primary transition-all font-semibold text-lg">
               🤖 AI Chat
+            </Link>
+            <Link to="/assignments" className="text-foreground hover:text-primary transition-all font-semibold text-lg">
+              📚 Assignments
             </Link>
             <Link to="/login">
               <Button variant="outline" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-base py-6 glow-pink">

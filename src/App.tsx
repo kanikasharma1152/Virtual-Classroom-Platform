@@ -10,6 +10,7 @@ import Courses from "./pages/Courses";
 import Schedule from "./pages/Schedule";
 import LiveClass from "./pages/LiveClass";
 import Chatbot from "./pages/Chatbot";
+import Assignments from "./pages/Assignments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/live-class" element={<LiveClass />} />
           <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/assignments" element={<Assignments />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
