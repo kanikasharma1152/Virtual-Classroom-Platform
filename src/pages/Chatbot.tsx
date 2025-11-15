@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { MessageSquare, Send, Bot, User, Sparkles } from "lucide-react";
+import { MessageSquare, Send, Bot, User, Sparkles, Smile, Heart, Star, Zap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { useNavigate } from "react-router-dom";
 import aiRobot from "@/assets/ai-robot.png";
@@ -49,15 +49,38 @@ const Chatbot = () => {
     // Simulate AI response
     setTimeout(() => {
       const responses: { [key: string]: string } = {
-        "What's my next class?": "Your next class is Web Development with Dr. Smith at 2:00 PM in Virtual Room 1.",
-        "Show my assignments": "You have 3 pending assignments:\n1. React Project (Due: Tomorrow)\n2. Algorithm Analysis (Due: 3 days)\n3. Database Design (Due: 1 week)",
-        "Check my attendance": "Your attendance this semester is 92%. You've attended 24 out of 26 classes.",
-        "View class schedule": "You have 2 classes today:\n- Web Development at 9:00 AM\n- Data Structures at 2:00 PM",
+        "What's my next class?": "🎓 Your next class is Web Development with Dr. Smith at 2:00 PM in Virtual Room 1. Don't forget to bring your project files!",
+        "Show my assignments": "📚 You have 3 pending assignments:\n1. React Project (Due: Tomorrow) - 75% complete\n2. Algorithm Analysis (Due: 3 days) - Not started\n3. Database Design (Due: 1 week) - 50% complete\n\nWould you like help with any of them?",
+        "Check my attendance": "✅ Your attendance this semester is 92%. You've attended 24 out of 26 classes. Keep up the great work! 🌟",
+        "View class schedule": "📅 You have 2 classes today:\n- Web Development at 9:00 AM ✓\n- Data Structures at 2:00 PM\n\nTomorrow you have 3 classes scheduled.",
+        "hello": "👋 Hello! I'm so happy to chat with you! How can I help you today?",
+        "hi": "Hi there! 😊 What would you like to know about your classes?",
+        "help": "💡 I can help you with:\n• Class schedules and timings\n• Assignment deadlines and progress\n• Attendance records\n• Course materials\n• Study tips and resources\n\nJust ask me anything!",
       };
+
+      const lowerMessage = message.toLowerCase();
+      let responseContent = responses[message] || responses[lowerMessage];
+      
+      if (!responseContent) {
+        const greetings = ["hello", "hi", "hey", "namaste"];
+        const isGreeting = greetings.some(g => lowerMessage.includes(g));
+        
+        if (isGreeting) {
+          responseContent = "👋 Hello! I'm your friendly AI assistant. How can I help you today? 😊";
+        } else if (lowerMessage.includes("course")) {
+          responseContent = "📖 I can help you explore your courses! You're currently enrolled in Web Development, Data Structures, and Database Management. Would you like to know more about any specific course?";
+        } else if (lowerMessage.includes("assignment") || lowerMessage.includes("homework")) {
+          responseContent = "📝 Let me check your assignments! You have some pending work. Would you like me to show you the details?";
+        } else if (lowerMessage.includes("grade") || lowerMessage.includes("score")) {
+          responseContent = "🎯 Your overall performance is excellent! Your average grade is 87%. Keep up the great work!";
+        } else {
+          responseContent = "I'm here to help you with your academic journey! 🌟 Ask me about classes, assignments, attendance, or anything else you'd like to know!";
+        }
+      }
 
       const aiMessage: Message = {
         role: "assistant",
-        content: responses[message] || "I can help you with class schedules, assignments, attendance, and more. What would you like to know?",
+        content: responseContent,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
@@ -96,8 +119,8 @@ const Chatbot = () => {
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {message.role === "assistant" && (
-                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <Bot className="w-5 h-5 text-primary" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-pink-500 flex items-center justify-center flex-shrink-0 animate-pulse-glow">
+                      <Sparkles className="w-5 h-5 text-white" />
                     </div>
                   )}
                   <div
@@ -111,8 +134,8 @@ const Chatbot = () => {
                     <p className="text-xs opacity-70 mt-1">{message.timestamp}</p>
                   </div>
                   {message.role === "user" && (
-                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
-                      <User className="w-5 h-5" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center flex-shrink-0">
+                      <User className="w-5 h-5 text-white" />
                     </div>
                   )}
                 </div>
@@ -120,8 +143,8 @@ const Chatbot = () => {
               
               {isTyping && (
                 <div className="flex gap-3 animate-fade-in">
-                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-primary" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-pink-500 flex items-center justify-center flex-shrink-0 animate-pulse-glow">
+                    <Sparkles className="w-5 h-5 text-white animate-pulse" />
                   </div>
                   <div className="glass-card rounded-2xl px-4 py-3">
                     <div className="flex gap-1">
@@ -135,41 +158,23 @@ const Chatbot = () => {
             </div>
 
             {/* Quick Questions */}
-            <div className="mb-4">
-              <p className="text-sm text-muted-foreground mb-2">Quick actions:</p>
+            <div className="mb-6">
+              <p className="text-xs text-muted-foreground mb-3 flex items-center gap-2">
+                <Star className="w-3 h-3" />
+                Try asking me:
+              </p>
               <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate("/schedule")}
-                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
-                >
-                  View Schedule
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate("/courses")}
-                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
-                >
-                  My Courses
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate("/live-class")}
-                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
-                >
-                  Join Live Class
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate("/dashboard")}
-                  className="text-xs border-primary/30 hover:bg-primary hover:text-primary-foreground"
-                >
-                  Dashboard
-                </Button>
+                {quickQuestions.map((question, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    size="sm"
+                    className="text-xs hover:bg-primary/10 hover:border-primary transition-all"
+                    onClick={() => handleSend(question)}
+                  >
+                    {question}
+                  </Button>
+                ))}
               </div>
             </div>
 
@@ -182,15 +187,15 @@ const Chatbot = () => {
               className="flex gap-2"
             >
               <Input
-                placeholder="Ask me anything..."
+                placeholder="Ask me anything... 💬"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="bg-navy border-navy-light focus:border-primary glow-pink"
+                className="bg-background/50 border-border focus:border-primary"
               />
               <Button 
                 type="submit" 
                 size="icon" 
-                className="bg-primary hover:bg-primary/90 glow-pink flex-shrink-0"
+                className="bg-gradient-to-br from-primary to-pink-500 hover:from-primary/90 hover:to-pink-500/90 glow-pink flex-shrink-0"
                 disabled={isTyping}
               >
                 <Send className="w-4 h-4" />
@@ -198,34 +203,36 @@ const Chatbot = () => {
             </form>
           </Card>
 
-          {/* Features Info */}
-          <div className="grid md:grid-cols-3 gap-4">
-            <Card 
-              className="glass-card p-4 text-center animate-fade-in cursor-pointer hover:scale-105 transition-all" 
-              style={{ animationDelay: '0.2s' }}
-              onClick={() => navigate("/schedule")}
-            >
-              <MessageSquare className="w-6 h-6 text-primary mx-auto mb-2" />
-              <h3 className="text-sm font-semibold mb-1">24/7 Available</h3>
-              <p className="text-xs text-muted-foreground">Always here to help</p>
+          {/* Chat Features Info */}
+          <div className="grid md:grid-cols-3 gap-4 mt-6">
+            <Card className="glass-card p-4 text-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-pink-500 flex items-center justify-center mx-auto mb-3 animate-pulse-glow">
+                <Heart className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="font-semibold text-sm mb-1">Friendly & Smart</h3>
+              <p className="text-xs text-muted-foreground">
+                Chat naturally with your AI assistant
+              </p>
             </Card>
-            <Card 
-              className="glass-card p-4 text-center animate-fade-in cursor-pointer hover:scale-105 transition-all" 
-              style={{ animationDelay: '0.3s' }}
-              onClick={() => navigate("/courses")}
-            >
-              <Sparkles className="w-6 h-6 text-primary mx-auto mb-2" />
-              <h3 className="text-sm font-semibold mb-1">Smart Responses</h3>
-              <p className="text-xs text-muted-foreground">Powered by IBM Watson</p>
+
+            <Card className="glass-card p-4 text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mx-auto mb-3">
+                <Zap className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="font-semibold text-sm mb-1">Instant Answers</h3>
+              <p className="text-xs text-muted-foreground">
+                Get quick responses to all your questions
+              </p>
             </Card>
-            <Card 
-              className="glass-card p-4 text-center animate-fade-in cursor-pointer hover:scale-105 transition-all" 
-              style={{ animationDelay: '0.4s' }}
-              onClick={() => navigate("/live-class")}
-            >
-              <Bot className="w-6 h-6 text-primary mx-auto mb-2" />
-              <h3 className="text-sm font-semibold mb-1">Personalized</h3>
-              <p className="text-xs text-muted-foreground">Learns your preferences</p>
+
+            <Card className="glass-card p-4 text-center animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-3">
+                <Smile className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="font-semibold text-sm mb-1">Always Here</h3>
+              <p className="text-xs text-muted-foreground">
+                24/7 support for your learning journey
+              </p>
             </Card>
           </div>
         </div>
